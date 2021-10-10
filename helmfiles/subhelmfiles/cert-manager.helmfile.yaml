@@ -13,7 +13,7 @@ releases:
       namespace: "cert-manager"
       vendor: "jetstack"
     chart: "jetstack/cert-manager"
-    version: "1.0.1"
+    version: "1.5.4"
     wait: true
     atomic: true
     cleanupOnFail: true
