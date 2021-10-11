@@ -1,10 +1,5 @@
 #!/bin/bash -x
 
-RANCHER_VERSION=$1
-RANCHER_URL=$2
-RANCHER_TOKEN=$3
-RANCHER_CA_CHECKSUM=$4
-
 cat <<EOF > /etc/sysctl.d/90-kubelet.conf
 vm.overcommit_memory = 1
 vm.panic_on_oom = 0
