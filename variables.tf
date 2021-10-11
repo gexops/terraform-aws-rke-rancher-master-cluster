@@ -98,7 +98,8 @@ variable "node_volume_type" {
 variable "ami_name" {
   type        = string
   description = "AMI to Use in Nodes"
-  default     = "ubuntu/images/hvm-ssd/ubuntu-bionic-20.04-amd64-server-*"
+  default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+  // Use ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-* for 18.04
 }
 
 variable "ami_owner" { 
