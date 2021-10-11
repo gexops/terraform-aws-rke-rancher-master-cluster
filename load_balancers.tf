@@ -28,7 +28,7 @@ resource "aws_elb" "ingress" { #tfsec:ignore:AWS005
     timeout             = 2
     unhealthy_threshold = 2
   }
-  instances    = concat(tolist(aws_instance.node_group_1.*.id), tolist(aws_instance.node_group_2.*.id), tolist(aws_instance.node_group_3.*.id))
+  instances    = concat(tolist(aws_instance.node_group_1.*.id), tolist(aws_instance.node_group_2.*.id), tolist(aws_instance.node_group_3.*.id), tolist(aws_instance.node_group_4.*.id))
   idle_timeout = 1800
 
   tags = module.label.tags

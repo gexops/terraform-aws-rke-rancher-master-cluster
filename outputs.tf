@@ -17,7 +17,8 @@ output "cluster_kubeconfig" {
 
 output "rancher_endpoint" {
   description = "Endpoint of Rancher Server"
-  value       = "https://${var.subdomain_rancher}.${var.hosted_zone_domain_name}"
+  value       = "https://${var.rancher_domain_endpoint}"
+  #value       = "https://${var.subdomain_rancher}.${var.hosted_zone_domain_name}"
 }
 
 output "rancher_admin_password" {

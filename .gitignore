@@ -8,7 +8,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-
+*cache*
 # Crash log files
 crash.log
 

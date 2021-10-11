@@ -33,10 +33,30 @@ variable "additional_tag_map" {
   description = "Map of additional tags to apply to every taggable resource. If you don't want any use an empty map - '{}'"
 }
 
-variable "instance_type" {
+variable "instance_type_a" {
   type        = string
-  description = "Instance type to use for the cluster nodes"
+  description = "Instance type to use for the cluster nodes in Node Group 1,3"
+  default     = "t3a.large"
 }
+
+variable "instance_count_a" {
+  type        = number
+  description = "Number of cluster nodes in Node Group 1,3"
+  default     = 1
+}
+
+variable "instance_type_b" {
+  type        = string
+  description = "Instance type to use for the cluster nodes in Node Group 2,4"
+  default     = "t3a.medium"
+}
+
+variable "instance_count_b" {
+  type        = number
+  description = "Number of cluster nodes in Node Group 2,4"
+  default     = 1
+}
+
 
 variable "vpc_id" {
   type        = string
@@ -58,9 +78,33 @@ variable "node_group_3_subnet_id" {
   description = "Subnet to deploy node group 3 to"
 }
 
+variable "node_group_4_subnet_id" {
+  type        = string
+  description = "Subnet to deploy node group 4 to"
+}
+
+
 variable "node_volume_size" {
   type        = string
   description = "Volume size of worker node disk in GB"
+}
+
+variable "node_volume_type" {
+  type        = string
+  description = "Volume Type"
+  default     = "gp3" 
+}
+
+variable "ami_name" {
+  type        = string
+  description = "AMI to Use in Nodes"
+  default     = "ubuntu/images/hvm-ssd/ubuntu-bionic-20.04-amd64-server-*"
+}
+
+variable "ami_owner" { 
+  type        = string
+  description = "AMI Owner. Default = Canonical"
+  default     = "099720109477"
 }
 
 variable "kubernetes_version" {
@@ -78,9 +122,15 @@ variable "hosted_zone_domain_name" {
   description = "Domain name of the hosted zone to create records in"
 }
 
+variable "rancher_domain_endpoint" {
+  type        = string
+  description = "The FQDN that Rancher will be live at. https://'{rancher_domain_endpoint}"
+}
+
 variable "subdomain_rancher" {
   type        = string
-  description = "Rancher's endpoint will be '{subdomain_rancher}.{hosted_zone_domain_name}'. {subdomain_rancher} can be multi-layered e.g. 'rancher.foo.bar'"
+  description = "[Deprecated] Rancher's endpoint will be '{subdomain_rancher}.{hosted_zone_domain_name}'. {subdomain_rancher} can be multi-layered e.g. 'rancher.foo.bar'"
+  default     = null
 }
 
 variable "rancher_letsencrypt_email" {

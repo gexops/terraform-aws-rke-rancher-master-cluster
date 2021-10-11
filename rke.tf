@@ -32,12 +32,24 @@ resource "rke_cluster" "default" {
     }
   }
 
+  dynamic nodes {
+    for_each = aws_instance.node_group_4
+    content {
+      address          = nodes.value.public_ip
+      internal_address = nodes.value.private_ip
+      user             = local.ssh_user
+      role             = ["controlplane", "etcd", "worker"]
+      ssh_key          = tls_private_key.ssh.private_key_pem
+    }
+  }
+
   cluster_name       = module.label.id
   kubernetes_version = var.kubernetes_version
   depends_on = [
     aws_instance.node_group_1,
     aws_instance.node_group_2,
     aws_instance.node_group_3,
+    aws_instance.node_group_4,
     aws_elb.ingress,
     aws_route53_record.rancher,
     aws_security_group.ingress_elb,
