@@ -19,5 +19,13 @@ systemctl restart docker && systemctl enable docker
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 PRIVATE_IP=$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" -s http://169.254.169.254/latest/meta-data/local-ipv4)
 PUBLIC_IP=$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" -s http://169.254.169.254/latest/meta-data/public-ipv4)
+DEFAULT_ROLES="--etcd --controlplane"
+K8S_ROLES=${RANCHER_ROLES:-$DEFAULT_ROLES}
 
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:${RANCHER_VERSION:-v2.6.0} --server https://${RANCHER_URL} --token ${RANCHER_TOKEN} --address ${PUBLIC_IP} --internal-address ${PRIVATE_IP}
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes \
+    -v /var/run:/var/run rancher/rancher-agent:${RANCHER_VERSION:-v2.6.0} \
+    --server https://${RANCHER_URL} \
+    --token ${RANCHER_TOKEN} \
+    --address ${PUBLIC_IP} \
+    --internal-address ${PRIVATE_IP} \
+    ${K8S_ROLES}
