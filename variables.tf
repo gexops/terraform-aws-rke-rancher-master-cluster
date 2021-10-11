@@ -92,7 +92,7 @@ variable "node_volume_size" {
 variable "node_volume_type" {
   type        = string
   description = "Volume Type"
-  default     = "gp3" 
+  default     = "gp2"
 }
 
 variable "ami_name" {
