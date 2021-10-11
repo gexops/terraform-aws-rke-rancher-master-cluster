@@ -19,7 +19,7 @@ resource "aws_instance" "node_group_1" {
   associate_public_ip_address = true #tfsec:ignore:AWS012
   ebs_optimized               = true
   root_block_device {
-    volume_type = var.volume_type
+    volume_type = var.node_volume_type
     volume_size = var.node_volume_size
   }
   tags = merge(module.label.tags,
@@ -51,7 +51,7 @@ resource "aws_instance" "node_group_2" {
   associate_public_ip_address = true #tfsec:ignore:AWS012
   ebs_optimized               = true
   root_block_device {
-    volume_type = var.volume_type
+    volume_type = var.node_volume_type
     volume_size = var.node_volume_size
   }
   tags = merge(module.label.tags,
@@ -83,7 +83,7 @@ resource "aws_instance" "node_group_3" {
   associate_public_ip_address = true #tfsec:ignore:AWS012
   ebs_optimized               = true
   root_block_device {
-    volume_type = var.volume_type
+    volume_type = var.node_volume_type
     volume_size = var.node_volume_size
   }
   tags = merge(module.label.tags,
@@ -115,7 +115,7 @@ resource "aws_instance" "node_group_4" {
   associate_public_ip_address = true
   ebs_optimized               = true
   root_block_device {
-    volume_type = var.volume_type
+    volume_type = var.node_volume_type
     volume_size = var.node_volume_size
   }
   tags = merge(module.label.tags,
